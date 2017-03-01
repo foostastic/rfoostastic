@@ -22,8 +22,8 @@
                   ( x<%= share.amount %> )
                 <% end %>
               </td>
-              <td align="right"><%= share.buy_price.to_i %> </td>
-              <td align="right"><%= share.get_current_value %></td>
+              <td align="right"><%= number_to_points share.buy_price %> </td>
+              <td align="right"><%= number_to_points share.get_current_value %></td>
               <td align="center">
                 <span class="label <%= 'label-success' if share.get_last_variation > 0 %><%= 'label-danger' if share.get_last_variation < 0 %>">
                   <i class="glyphicon glyphicon-chevron-<%= 'up' if share.get_last_variation >= 0 %><%= 'down' if share.get_last_variation < 0 %>"></i> <%= number_to_percentage share.get_last_variation.abs %>
@@ -76,7 +76,7 @@
                     <span class="label label-danger">Sold out</span>
                   <% end %>
                 </td>
-                <td align="right"><%= player.get_current_value.to_i %></td>
+                <td align="right"><%= number_to_points player.get_current_value %></td>
                 <td align="right">
                   <% if player.get_available_stocks == 0 %>
                     <button class="btn btn-secondary btn-sm disabled" disabled>Sold out</button >

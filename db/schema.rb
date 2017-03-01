@@ -16,27 +16,27 @@ ActiveRecord::Schema.define(version: 20170228090918) do
     t.string   "name"
     t.integer  "division"
     t.integer  "position"
-    t.decimal  "points",     precision: 5, scale: 2
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.decimal  "points",     precision: 20, scale: 6
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
   create_table "shares", force: :cascade do |t|
     t.integer  "amount"
-    t.bigint   "buy_price"
+    t.decimal  "buy_price",  precision: 20, scale: 6
     t.integer  "player_id"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.index ["player_id"], name: "index_shares_on_player_id"
     t.index ["user_id"], name: "index_shares_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string   "username"
-    t.bigint   "credit"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.decimal  "credit",     precision: 20, scale: 6
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 

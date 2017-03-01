@@ -15,7 +15,7 @@
         <td class="col-md-1"><%= i + 1 %></td>
         <td class="col-md-9"><%= user.username %></td>
         <td class="col-md-2">
-          <%= user.get_total_value %>
+          <%= number_to_points user.get_total_value %>
           <% if user_value_changed_today? user and user.get_diff_value_on_last_change != 0 %>
             <% if user.get_diff_value_on_last_change >= 0 %>
               <span style='color: green;'><i class='glyphicon glyphicon-arrow-up'></i> <%= user.get_diff_value_on_last_change %></span>

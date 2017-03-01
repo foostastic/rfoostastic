@@ -4,7 +4,7 @@ class CreatePlayers < ActiveRecord::Migration[5.0]
       t.string :name
       t.integer :division
       t.integer :position
-      t.decimal :points, precision:5, scale:2
+      t.decimal :points, precision:20, scale:6
 
       t.timestamps
     end
