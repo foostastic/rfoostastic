@@ -4,6 +4,11 @@ class Player < ApplicationRecord
     (points * get_ratio_for_division(division)) + get_offset_for_division(division)
   end
 
+  def get_available_stocks
+    max_stock = ENV["AVAILABLE_STOCK"] || 3
+    max_stock - Share.get_sold_stocks_for_player(self)
+  end
+
   private
 
   def get_ratio_for_division(division)
