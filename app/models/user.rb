@@ -9,4 +9,15 @@ class User < ApplicationRecord
     value
   end
 
+  def self.find_or_create_from_auth_hash(auth_hash)
+    user = User.find_by(username: auth_hash.uid)
+    unless user
+      user = User.new
+      user.username = auth_hash.uid
+      user.credit = 300
+      user.save
+    end
+    user
+  end
+
 end
