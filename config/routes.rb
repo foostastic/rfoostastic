@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   post 'foos/sell', to: 'foos#sell'
   post 'foos/buy', to: 'foos#buy'
 
+  get 'onMatchFinished/:key', to: 'webhook#suso_refresh'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   post '/auth/:provider/callback', to: 'sessions#create'
 end
