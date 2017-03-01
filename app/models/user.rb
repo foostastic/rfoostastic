@@ -9,6 +9,15 @@ class User < ApplicationRecord
     value
   end
 
+  def get_value_on_last_change
+    # TODO
+    get_total_value
+  end
+
+  def get_diff_value_on_last_change
+    get_total_value - get_value_on_last_change
+  end
+
   def self.find_or_create_from_auth_hash(auth_hash)
     user = User.find_by(username: auth_hash.uid)
     unless user
