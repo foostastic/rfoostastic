@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  username: MyString
-  credit: 
+  social_id: one
+  credit: 100
+  name: One One
 
 two:
-  username: MyString
-  credit: 
+  social_id: two
+  credit: 200
+  name: Two Two

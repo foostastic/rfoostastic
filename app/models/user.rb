@@ -20,13 +20,14 @@ class User < ApplicationRecord
   end
 
   def self.find_or_create_from_auth_hash(auth_hash)
-    user = User.find_by(username: auth_hash.uid)
-    unless user
-      user = User.new
-      user.username = auth_hash.uid
-      user.credit = 300
-      user.save
+    social_id = "#{auth_hash.provider}:#{auth_hash.uid}"
+    user = User.find_or_initialize_by(social_id: social_id) do |u|
+      u.credit = ENV["INIT_CREDIT"] || 300
     end
+    user.name = auth_hash.info.name
+    user.email = auth_hash.info.email
+    user.image = auth_hash.info.image
+    user.save
     user
   end
 

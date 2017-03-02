@@ -55,12 +55,15 @@ ActiveRecord::Schema.define(version: 20170302100428) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "username"
+    t.string   "social_id"
     t.decimal  "credit",       precision: 20, scale: 6, default: "0.0"
     t.decimal  "shares_value", precision: 20, scale: 6, default: "0.0"
+    t.string   "name"
+    t.string   "email"
+    t.string   "image"
     t.datetime "created_at",                                            null: false
     t.datetime "updated_at",                                            null: false
-    t.index ["username"], name: "index_users_on_username", unique: true
+    t.index ["social_id"], name: "index_users_on_social_id", unique: true
   end
 
 end
