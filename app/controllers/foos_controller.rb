@@ -20,18 +20,7 @@ class FoosController < ApplicationController
       redirect_to foos_path and return
     end
 
-    profit = share.player.get_current_value * amount
-    share.amount -= amount
-    share.amount = 0 if share.amount < 0
-
-    if share.amount == 0 then
-      share.destroy
-    else
-      share.save
-    end
-
-    current_user.credit += profit
-    current_user.save
+    current_user.sell share, amount
 
     flash[:info] = 'Sell operation completed successfully'
     redirect_to foos_path
@@ -58,15 +47,7 @@ class FoosController < ApplicationController
       redirect_to foos_path and return
     end
 
-    share = Share.new
-    share.amount = amount
-    share.buy_price = player.get_current_value
-    share.player = player
-    share.user = current_user
-    share.save
-
-    current_user.credit -= cost
-    current_user.save
+    current_user.buy player, amount
 
     flash[:info] = 'Buy operation completed successfully'
     redirect_to foos_path

@@ -2,9 +2,6 @@ class Share < ApplicationRecord
   belongs_to :player
   belongs_to :user
 
-  after_save :on_player_value_update
-  after_destroy :on_player_value_update
-
   def get_current_value
     player.get_current_value * amount
   end

@@ -18,9 +18,9 @@
           <%= number_to_points user.get_total_value %>
           <% if user_value_changed_today? user and user.get_diff_value_on_last_change != 0 %>
             <% if user.get_diff_value_on_last_change >= 0 %>
-              <span style='color: green;'><i class='glyphicon glyphicon-arrow-up'></i> <%= user.get_diff_value_on_last_change %></span>
+              <span style='color: green;'><i class='glyphicon glyphicon-arrow-up'></i> <%= number_to_points user.get_diff_value_on_last_change %></span>
             <% else %>
-              <span style='color: red;'><i class='glyphicon glyphicon-arrow-down'></i> <%= user.get_diff_value_on_last_change %></span>
+              <span style='color: red;'><i class='glyphicon glyphicon-arrow-down'></i> <%= number_to_points user.get_diff_value_on_last_change %></span>
             <% end %>
           <% end %>
         </td>

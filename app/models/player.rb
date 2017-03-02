@@ -1,4 +1,5 @@
 class Player < ApplicationRecord
+  audited
   has_many :shares
 
   after_update :on_player_update
