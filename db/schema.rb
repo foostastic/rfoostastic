@@ -34,9 +34,10 @@ ActiveRecord::Schema.define(version: 20170228090918) do
 
   create_table "users", force: :cascade do |t|
     t.string   "username"
-    t.decimal  "credit",     precision: 20, scale: 6
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.decimal  "credit",       precision: 20, scale: 6, default: "0.0"
+    t.decimal  "shares_value", precision: 20, scale: 6, default: "0.0"
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 

@@ -1,4 +1,7 @@
 class Player < ApplicationRecord
+  has_many :shares
+
+  after_update :on_player_update
 
   def get_current_value
     (points * get_ratio_for_division(division)) + get_offset_for_division(division)
@@ -19,6 +22,10 @@ class Player < ApplicationRecord
   def get_offset_for_division(division)
     values = {1 => 900, 2 => 300, 3 => 0}
     values[division]
+  end
+
+  def on_player_update
+    shares.each { |share| share.on_player_value_update } if points_changed?
   end
 
 end

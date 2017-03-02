@@ -2,11 +2,7 @@ class User < ApplicationRecord
   has_many :shares
 
   def get_total_value
-    value = credit
-    shares.each do |share|
-      value += share.get_current_value
-    end
-    value
+    credit + shares_value
   end
 
   def get_value_on_last_change
@@ -27,6 +23,20 @@ class User < ApplicationRecord
       user.save
     end
     user
+  end
+
+  def on_player_value_update
+    update_attributes(shares_value: calculate_shares_value)
+  end
+
+  private
+
+  def calculate_shares_value
+    value = 0
+    shares.each do |share|
+      value += share.get_current_value
+    end
+    value
   end
 
 end
