@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20170302100428) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "audits", force: :cascade do |t|
     t.integer  "auditable_id"
     t.string   "auditable_type"
@@ -27,11 +30,11 @@ ActiveRecord::Schema.define(version: 20170302100428) do
     t.string   "remote_address"
     t.string   "request_uuid"
     t.datetime "created_at"
-    t.index ["associated_id", "associated_type"], name: "associated_index"
-    t.index ["auditable_id", "auditable_type"], name: "auditable_index"
-    t.index ["created_at"], name: "index_audits_on_created_at"
-    t.index ["request_uuid"], name: "index_audits_on_request_uuid"
-    t.index ["user_id", "user_type"], name: "user_index"
+    t.index ["associated_id", "associated_type"], name: "associated_index", using: :btree
+    t.index ["auditable_id", "auditable_type"], name: "auditable_index", using: :btree
+    t.index ["created_at"], name: "index_audits_on_created_at", using: :btree
+    t.index ["request_uuid"], name: "index_audits_on_request_uuid", using: :btree
+    t.index ["user_id", "user_type"], name: "user_index", using: :btree
   end
 
   create_table "players", force: :cascade do |t|
@@ -50,8 +53,8 @@ ActiveRecord::Schema.define(version: 20170302100428) do
     t.integer  "user_id"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.index ["player_id"], name: "index_shares_on_player_id"
-    t.index ["user_id"], name: "index_shares_on_user_id"
+    t.index ["player_id"], name: "index_shares_on_player_id", using: :btree
+    t.index ["user_id"], name: "index_shares_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -63,7 +66,7 @@ ActiveRecord::Schema.define(version: 20170302100428) do
     t.string   "image"
     t.datetime "created_at",                                            null: false
     t.datetime "updated_at",                                            null: false
-    t.index ["social_id"], name: "index_users_on_social_id", unique: true
+    t.index ["social_id"], name: "index_users_on_social_id", unique: true, using: :btree
   end
 
 end
