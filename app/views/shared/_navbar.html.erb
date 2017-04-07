@@ -21,7 +21,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if @_current_user %>
-          <li><a href="#">Credit: <%= number_to_points @_current_user.credit %></a></li>
+          <li><p class="navbar-text">Season: <%= @_current_season.name %></p></li>
+          <li><p class="navbar-text">Credit: <%= number_to_points @_current_user_season.credit %></p></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
               <i class="glyphicon glyphicon-user"></i><%= @_current_user.name %><span class="caret"></span></span></a>

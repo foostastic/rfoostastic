@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170302100428) do
+ActiveRecord::Schema.define(version: 20170323174103) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,29 +44,50 @@ ActiveRecord::Schema.define(version: 20170302100428) do
     t.decimal  "points",     precision: 20, scale: 6
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.integer  "season_id"
+    t.index ["season_id"], name: "index_players_on_season_id", using: :btree
+  end
+
+  create_table "seasons", force: :cascade do |t|
+    t.string   "name"
+    t.string   "foos_id"
+    t.boolean  "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "shares", force: :cascade do |t|
     t.integer  "amount"
-    t.decimal  "buy_price",  precision: 20, scale: 6
+    t.decimal  "buy_price",      precision: 20, scale: 6
     t.integer  "player_id"
-    t.integer  "user_id"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.integer  "user_season_id"
     t.index ["player_id"], name: "index_shares_on_player_id", using: :btree
-    t.index ["user_id"], name: "index_shares_on_user_id", using: :btree
+    t.index ["user_season_id"], name: "index_shares_on_user_season_id", using: :btree
+  end
+
+  create_table "user_seasons", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "season_id"
+    t.decimal  "credit",       precision: 20, scale: 6, default: "0.0"
+    t.decimal  "shares_value", precision: 20, scale: 6, default: "0.0"
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
+    t.index ["season_id"], name: "index_user_seasons_on_season_id", using: :btree
+    t.index ["user_id"], name: "index_user_seasons_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
     t.string   "social_id"
-    t.decimal  "credit",       precision: 20, scale: 6, default: "0.0"
-    t.decimal  "shares_value", precision: 20, scale: 6, default: "0.0"
     t.string   "name"
     t.string   "email"
     t.string   "image"
-    t.datetime "created_at",                                            null: false
-    t.datetime "updated_at",                                            null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["social_id"], name: "index_users_on_social_id", unique: true, using: :btree
   end
 
+  add_foreign_key "user_seasons", "seasons"
+  add_foreign_key "user_seasons", "users"
 end

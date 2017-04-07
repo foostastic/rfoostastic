@@ -10,7 +10,11 @@ class ApplicationController < ActionController::Base
   # a Rails application; logging in sets the session value and
   # logging out removes it.
   def current_user
-    @_current_user ||= session[:current_user_id] && User.find_by(id: session[:current_user_id])
+    @_current_season = Season.find_by(active: true)
+    @_current_user ||= session[:current_user_id] && User.find(session[:current_user_id])
+    if @_current_user then
+      @_current_user_season = UserSeason.create_for_session_if_not_exists(@_current_user, @_current_season)
+    end
   end
 
   def require_login

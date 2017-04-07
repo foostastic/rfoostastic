@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  share: one
+  credit: 
+  credit: 
+  shares_value: 
+  shares_value: 
+
+two:
+  user: two
+  share: two
+  credit: 
+  credit: 
+  shares_value: 
+  shares_value: 
