@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
     if @_current_user then
       @_current_user_season = UserSeason.create_for_session_if_not_exists(@_current_user, @_current_season)
     end
+    @_current_user
   end
 
   def require_login

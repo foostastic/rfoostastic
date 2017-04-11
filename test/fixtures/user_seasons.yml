@@ -2,16 +2,12 @@
 
 one:
   user: one
-  share: one
-  credit: 
-  credit: 
-  shares_value: 
-  shares_value: 
+  season: one
+  credit: 100
+  shares_value: 200
 
 two:
   user: two
-  share: two
-  credit: 
-  credit: 
-  shares_value: 
-  shares_value: 
+  season: two
+  credit: 101
+  shares_value: 201

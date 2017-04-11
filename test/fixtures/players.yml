@@ -1,13 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  name: one
+  season: one
   division: 1
   position: 1
   points: 9.99
 
 two:
-  name: MyString
-  division: 1
-  position: 1
-  points: 9.99
+  name: two
+  season: two
+  division: 2
+  position: 2
+  points: 29.99
