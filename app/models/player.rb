@@ -1,6 +1,7 @@
 class Player < ApplicationRecord
   audited
   has_many :shares
+  belongs_to :season
 
   after_update :on_player_update
 

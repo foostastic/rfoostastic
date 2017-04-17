@@ -1,8 +1,11 @@
 class HomeController < ApplicationController
   def index
-    users = User.all
-    @ranking = users.sort do |a,b|
-      b.get_total_value <=> a.get_total_value
+    @ranking = nil
+    users = UserSeason.where(season: @_current_season)
+    if users.count > 0 then
+      @ranking = users.sort do |a,b|
+        b.get_total_value <=> a.get_total_value
+      end
     end
   end
 
@@ -13,6 +16,7 @@ class HomeController < ApplicationController
 
   def logout
     @_current_user = session[:current_user_id] = nil
+    @_current_user_season = nil
     redirect_to root_url
   end
 end

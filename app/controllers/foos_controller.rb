@@ -2,8 +2,8 @@ class FoosController < ApplicationController
   before_action :require_login
 
   def index
-    @shares = current_user.shares
-    @players = Player.order(:division).order(points: :desc).all
+    @shares = @_current_user_season.shares
+    @players = Player.where(season: @_current_season).order(:division).order(points: :desc)
   end
 
   def sell
@@ -20,7 +20,7 @@ class FoosController < ApplicationController
       redirect_to foos_path and return
     end
 
-    current_user.sell share, amount
+    @_current_user_season.sell share, amount
 
     flash[:info] = 'Sell operation completed successfully'
     redirect_to foos_path
@@ -42,12 +42,12 @@ class FoosController < ApplicationController
       redirect_to foos_path and return
     end
 
-    if cost > current_user.credit
+    if cost > @_current_user_season.credit
       flash[:error] = 'Buy operation could not complete. Not enough credit.'
       redirect_to foos_path and return
     end
 
-    current_user.buy player, amount
+    @_current_user_season.buy player, amount
 
     flash[:info] = 'Buy operation completed successfully'
     redirect_to foos_path

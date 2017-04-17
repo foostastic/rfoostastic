@@ -2,14 +2,10 @@
 
 one:
   name: one
-  season: one
-  division: 1
-  position: 1
-  points: 9.99
+  foos_id: foos_one
+  active: true
 
 two:
   name: two
-  season: two
-  division: 2
-  position: 2
-  points: 29.99
+  foos_id: foos_two
+  active: false

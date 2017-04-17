@@ -9,13 +9,15 @@ class SusoRefreshJob < ApplicationJob
     Player.transaction do
       players = suso_get "/players"
       seasons = suso_get "/seasons/#{season_id}"
+      season = Season.find_by(foos_id: seasons["id"])
+      raise "Season not found for foos_id #{seasons["id"]}" unless season
       seasons["divisions"].each do |division|
         players_info = suso_get "/divisions/#{division["id"]}/classification"
         players_info.each do |player_info|
           player_id = player_info["player_id"]
           points = player_info["points"]
           if points > 0
-            player = Player.find_or_initialize_by(name: players[player_id.to_s]["name"])
+            player = Player.find_or_initialize_by(name: players[player_id.to_s]["name"], season: season)
             player.division = division["level"]
             player.position = player_info["position"]
             player.points = points

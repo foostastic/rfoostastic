@@ -1,6 +1,6 @@
 class Share < ApplicationRecord
   belongs_to :player
-  belongs_to :user
+  belongs_to :user_season
 
   def get_current_value
     player.get_current_value * amount
@@ -15,7 +15,7 @@ class Share < ApplicationRecord
   end
 
   def on_player_value_update
-    user.on_player_value_update
+    user_season.on_player_value_update
   end
 
 end

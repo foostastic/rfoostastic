@@ -1,15 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: one
+  user: one
   season: one
-  division: 1
-  position: 1
-  points: 9.99
+  credit: 100
+  shares_value: 200
 
 two:
-  name: two
+  user: two
   season: two
-  division: 2
-  position: 2
-  points: 29.99
+  credit: 101
+  shares_value: 201
