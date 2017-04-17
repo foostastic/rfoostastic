@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
   # logging out removes it.
   def current_user
     @_current_season = Season.find_by(active: true)
+    raise 'No active season available' unless @_current_season
     @_current_user ||= session[:current_user_id] && User.find(session[:current_user_id])
     if @_current_user then
       @_current_user_season = UserSeason.create_for_session_if_not_exists(@_current_user, @_current_season)

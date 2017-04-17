@@ -10,6 +10,7 @@ class SusoRefreshJob < ApplicationJob
       players = suso_get "/players"
       seasons = suso_get "/seasons/#{season_id}"
       season = Season.find_by(foos_id: seasons["id"])
+      raise "Season not found for foos_id #{seasons["id"]}" unless season
       seasons["divisions"].each do |division|
         players_info = suso_get "/divisions/#{division["id"]}/classification"
         players_info.each do |player_info|
