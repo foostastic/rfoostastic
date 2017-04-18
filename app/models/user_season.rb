@@ -32,9 +32,10 @@ class UserSeason < ApplicationRecord
   end
 
   def sell(share, amount)
+    raise "Tried to sell shares you don't own... don't be a bad guy }:>" if share.amount - amount < 0
+
     profit = share.player.get_current_value * amount
     share.amount -= amount
-    share.amount = 0 if share.amount < 0
 
     if share.amount == 0 then
       share.destroy
