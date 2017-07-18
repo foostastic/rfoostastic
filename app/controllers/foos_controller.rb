@@ -35,6 +35,12 @@ class FoosController < ApplicationController
       flash[:error] = 'Buy operation could not complete. Requested player not found.'
       redirect_to foos_path and return
     end
+
+    unless player.can_be_bought
+      flash[:error] = 'Buy operation could not complete. Requested player cannot be bought.'
+      redirect_to foos_path and return
+    end
+
     cost = player.get_current_value * amount
 
     if amount <= 0 or amount > player.get_available_stocks

@@ -76,24 +76,30 @@
                     <span class="label label-danger">Sold out</span>
                   <% end %>
                 </td>
-                <td align="right"><%= number_to_points player.get_current_value %></td>
-                <td align="right">
-                  <% if player.get_available_stocks == 0 %>
-                    <button class="btn btn-secondary btn-sm disabled" disabled>Sold out</button >
-                  <% else %>
-                    <%= form_tag foos_buy_path, class: 'form-inline' do %>
-                      <div class="form-group">
-                        <div class="input-group form-group-sm">
-                          <%= hidden_field_tag(:id, player.id) %>
-                          <%= select_tag(:amount, options_for_select((1..player.get_available_stocks).to_a), class: 'form-control') %>
-                          <span class="input-group-btn" >
-                            <%= button_tag "Buy", type: 'submit', class:'btn btn-secondary btn-success btn-sm' %>
-                          </span >
+                <% if player.can_be_bought %>
+                  <td align="right"><%= number_to_points player.get_current_value %></td>
+                  <td align="right">
+                    <% if player.get_available_stocks == 0 %>
+                      <button class="btn btn-secondary btn-sm disabled" disabled>Sold out</button >
+                    <% else %>
+                      <%= form_tag foos_buy_path, class: 'form-inline' do %>
+                        <div class="form-group">
+                          <div class="input-group form-group-sm">
+                            <%= hidden_field_tag(:id, player.id) %>
+                            <%= select_tag(:amount, options_for_select((1..player.get_available_stocks).to_a), class: 'form-control') %>
+                            <span class="input-group-btn" >
+                              <%= button_tag "Buy", type: 'submit', class:'btn btn-secondary btn-success btn-sm' %>
+                            </span >
+                          </div>
                         </div>
-                      </div>
+                      <% end %>
                     <% end %>
-                  <% end %>
-                </td>
+                  </td>
+                <% else %>
+                    <td align="right" colspan="2">
+                      <button class="btn btn-secondary btn-sm disabled" disabled>Not available yet</button >
+                    </td>
+                <% end %>
               </tr>
             <% end %>
           <% end %>

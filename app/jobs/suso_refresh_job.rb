@@ -16,13 +16,11 @@ class SusoRefreshJob < ApplicationJob
         players_info.each do |player_info|
           player_id = player_info["player_id"]
           points = player_info["points"]
-          if points > 0
-            player = Player.find_or_initialize_by(name: players[player_id.to_s]["name"], season: season)
-            player.division = division["level"]
-            player.position = player_info["position"]
-            player.points = points
-            player.save
-          end
+          player = Player.find_or_initialize_by(name: players[player_id.to_s]["name"], season: season)
+          player.division = division["level"]
+          player.position = player_info["position"]
+          player.points = points
+          player.save
         end
       end
     end

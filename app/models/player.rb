@@ -14,16 +14,21 @@ class Player < ApplicationRecord
     max_stock - Share.get_sold_stocks_for_player(self)
   end
 
+  def can_be_bought
+    return false if get_current_value == 0
+    true
+  end
+
   private
 
   def get_ratio_for_division(division)
     values = {1 => 4, 2 => 2, 3 => 1}
-    values[division]
+    values[division] || 0
   end
 
   def get_offset_for_division(division)
     values = {1 => 900, 2 => 300, 3 => 0}
-    values[division]
+    values[division] || 0
   end
 
   def on_player_update
