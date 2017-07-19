@@ -15,7 +15,7 @@ class Player < ApplicationRecord
 
   def get_available_stocks
     max_stock = ENV["AVAILABLE_STOCK"] || 3
-    max_stock - Share.get_sold_stocks_for_player(self)
+    max_stock.to_i - Share.get_sold_stocks_for_player(self)
   end
 
   def can_be_bought
