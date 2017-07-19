@@ -6,7 +6,11 @@ class Player < ApplicationRecord
   after_update :on_player_update
 
   def get_current_value
-    (points * get_ratio_for_division(division)) + get_offset_for_division(division)
+    if points > 0 then
+      (points * get_ratio_for_division(division)) + get_offset_for_division(division)
+    else
+      0
+    end
   end
 
   def get_available_stocks

@@ -17,6 +17,14 @@ class PlayerTest < ActiveSupport::TestCase
   test "player default value is zero" do
     player = Player.new
     player.points = 0
-    assert player.get_current_value == 0
+    assert_equal 0, player.get_current_value
   end
+
+  test "player current value is zero in any division" do
+    player = Player.new
+    player.points = 0
+    player.division = 1
+    assert_equal 0, player.get_current_value
+  end
+
 end
