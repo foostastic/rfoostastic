@@ -12,8 +12,9 @@
       </tr>
     </thead>
     <% @ranking.each_with_index do |user_season, i| %>
-      <% value_diff = user_season.get_diff_value_on_last_change %>
       <tr class="<%= "bold" if user_season.user == @_current_user %>">
+      <% cache user_season do %>
+        <% value_diff = user_season.get_diff_value_on_last_change %>
         <td class="col-md-1"><%= i + 1 %></td>
         <td class="col-md-9"><%= user_season.user.name %></td>
         <td class="col-md-2">
@@ -26,6 +27,7 @@
             <% end %>
           <% end %>
         </td>
+      <% end %>
       </tr>
     <% end %>
   </table>
