@@ -3,7 +3,7 @@ class FoosController < ApplicationController
 
   def index
     @shares = @_current_user_season.shares
-    @players = Player.where(season: @_current_season).order(:division).order(points: :desc)
+    @players = Player.where(season: @_current_season).order(:division).order(:division_title).order(points: :desc)
   end
 
   def sell

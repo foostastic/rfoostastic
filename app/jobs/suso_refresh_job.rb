@@ -18,6 +18,7 @@ class SusoRefreshJob < ApplicationJob
           points = player_info["points"]
           player = Player.find_or_initialize_by(name: players[player_id.to_s]["name"], season: season)
           player.division = division["level"]
+          player.division_title = division["title"]
           player.position = player_info["position"]
           player.points = points
           player.save

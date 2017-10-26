@@ -6,6 +6,10 @@ class Share < ApplicationRecord
     player.get_current_value * amount
   end
 
+  def get_total_buy_price
+    buy_price * amount
+  end
+
   def get_last_variation
     0
   end
