@@ -1,4 +1,7 @@
 class WebhookController < ApplicationController
+
+  skip_before_filter :verify_authenticity_token
+
   def suso_refresh
     key = params.require(:key)
     if key != ENV["PRIVATE_PASSWORD"]
