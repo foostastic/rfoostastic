@@ -1,0 +1,40 @@
+<table border="1" rules="all" cellpadding="3">
+  <thead>
+    <tr>
+      <th class="col-md-2">Player</th>
+      <th class="col-md-1 text-right">Before</th>
+      <th class="col-md-1 text-right">Current</th>
+      <th class="col-md-1">&nbsp;</th>
+    </tr>
+  </thead>
+  <% @delta_user_value.d0.shares.each do |id, share| %>
+    <% share_d1 = @delta_user_value.d1.shares.fetch(id) %>
+    <% delta_value = share_d1.value - share.value %>
+    <% if delta_value != 0 %>
+    <tr>
+      <td>
+        <%= share.name %>
+        <% if share.amount > 1 %>
+          ( x<%= share.amount %> )
+        <% end %>
+      </td>
+      <td align="right"><%= number_to_points share.value %> </td>
+      <td align="right"><%= number_to_points share_d1.value %></td>
+      <td align="center">
+        <% if delta_value >= 0 %>
+          <span style="color: green">
+            + <%= number_to_percentage(delta_value.abs, precision: 0) %>
+          </span>
+        <% else %>
+          <span style="color: red">
+            - <%= number_to_percentage(delta_value.abs, precision: 0) %>
+          </span>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  <% end %>
+</table>
+<p>
+Visit <%= link_to 'Foostastic', home_index_url %>
+</p>
