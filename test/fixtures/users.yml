@@ -4,8 +4,15 @@ one:
   social_id: "developer:one@one.es"
   name: One One
   email: one@one.es
+  receives_mail: true
 
 two:
   social_id: "twitter:two"
   name: Two Two
   email: two@two.es
+
+three:
+  social_id: "developer:three@one.es"
+  name: Three Merlo
+  email: three@merlo.es
+  receives_mail: false

@@ -11,3 +11,9 @@ two:
   buy_price: 60
   player: two
   user_season: two
+
+three:
+  amount: 2
+  buy_price: 50
+  player: one
+  user_season: three

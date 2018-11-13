@@ -11,3 +11,9 @@ two:
   season: two
   credit: 101
   shares_value: 201
+
+three:
+  user: three
+  season: one
+  credit: 200
+  shares_value: 200
